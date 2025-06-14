@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WatchCoin – News Sambil Dapat Kripto</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; background:#fefefe; }
+    header { background:#fff; padding:1rem 2rem; border-bottom:1px solid #ddd; display:flex; justify-content:space-between; align-items:center; }
+    .logo { display:flex; align-items:center; }
+    .logo span { background:gold; border-radius:50%; width:30px; height:30px; display:inline-flex; justify-content:center; align-items:center; font-weight:bold; margin-right:8px; }
+    nav a { margin-left:20px; text-decoration:none; color:black; font-weight:bold; }
+    .hero { padding:2rem; text-align:center; }
+    .hero h1 { font-size:2.5rem; }
+    .hero button { margin-top:1rem; padding:.75rem 2rem; background:#2a66d9; color:#fff; border:none; border-radius:8px; font-size:1rem; cursor:pointer; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:1.5rem; padding:2rem; }
+    .card { border:2px solid #000; border-radius:10px; padding:1rem; background:#fff; display:flex; gap:1rem; }
+    .placeholder { width:50px; height:50px; background:#2a66d9; color:#fff; font-weight:bold; display:flex; justify-content:center; align-items:center; }
+    .news-content h3 { margin:0; font-size:1.1rem; }
+    .news-content p { margin:0.2rem 0 0; font-size:0.9rem; color:#333; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <span>W</span>
+      <strong>WATCHCOIN</strong>
+    </div>
+    <nav>
+      <a href="#">Home</a><a href="#">News</a><a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>Read News While Earning</h1>
+    <button onclick="loadNews()">Explore</button>
+  </div>
+
+  <section class="grid" id="news-grid">
+    <p>Loading news...</p>
+  </section>
+
+  <script>
+    async function loadNews() {
+      const grid = document.getElementById('news-grid');
+      grid.innerHTML = '<p>Loading...</p>';
+
+      try {
+        const res = await fetch(
+          'https://newsapi.org/v2/top-headlines?country=us&pageSize=5&apiKey=YOUR_API_KEY_HERE'
+        );
+        const data = await res.json();
+
+        grid.innerHTML = '';
+        data.articles.forEach(article => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          const icon = document.createElement('div');
+          icon.className = 'placeholder';
+          icon.textContent = '$';
+
+          const content = document.createElement('div');
+          content.className = 'news-content';
+          content.innerHTML = `<h3>${article.title}</h3><p>${article.description || ''}</p>`;
+
+          card.append(icon, content);
+          grid.appendChild(card);
+        });
+      } catch (e) {
+        grid.innerHTML = '<p>Error loading news.</p>';
+        console.error(e);
+      }
+    }
+
+    loadNews();
+  </script>
+</body>
+</html>
