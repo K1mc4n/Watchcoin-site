@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>WatchCoin – News Sambil Dapat Kripto</title>
+  <title>WatchCoin – News While Earning</title>
   <style>
     body { font-family: Arial, sans-serif; margin:0; background:#fefefe; }
     header { background:#fff; padding:1rem 2rem; border-bottom:1px solid #ddd; display:flex; justify-content:space-between; align-items:center; }
@@ -47,7 +47,7 @@
 
       try {
         const res = await fetch(
-          'https://newsapi.org/v2/top-headlines?country=us&pageSize=5&apiKey=6a40447e5d2845d1bbb46abf48e506dc'
+          'https://newsapi.org/v2/everything?q=crypto&pageSize=5&apiKey=6a40447e5d2845d1bbb46abf48e506dc'
         );
         const data = await res.json();
 
